@@ -10,9 +10,10 @@ from invoke import task
 #                Public API                   #
 ###############################################
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
-SRC_PATH = os.path.join(ROOT_PATH, "src")
+KICAD_SRC_PATH = os.path.join(ROOT_PATH, "kicad_src")
+OPENSCAD_SRC_PATH = os.path.join(ROOT_PATH, "openscad_src")
 BUILD_PATH = os.path.join(ROOT_PATH, "build")
-CC = "openscad"
+OPENSCAD_LIBS_PATH = os.path.join(BUILD_PATH, "openscad_libs")
 
 
 @task
@@ -53,6 +54,7 @@ def build(c):
     Usage:
         inv build
     """
+
     raise NotImplementedError()
 
 
@@ -76,6 +78,40 @@ def open_openscad(c):
         inv open
     """
     raise NotImplementedError()
+
+
+@task
+def download_deps(c):
+    """
+    Download all dependencies required to build the project.
+
+    Usage:
+        inv download-deps
+    """
+    _download_bosl2(c)
+
+
+def _download_bosl2(c):
+    _pr_info("Downloading BOSL2 library ...")
+    if not _command_exists("git"):
+        _pr_error("Git is not installed or not available in the PATH.")
+        return
+
+    if not os.path.exists(OPENSCAD_LIBS_PATH):
+        os.makedirs(OPENSCAD_LIBS_PATH)
+
+    repo_url = "https://github.com/BelfrySCAD/BOSL2.git"
+    clone_command = f"git clone {repo_url} {os.path.join(OPENSCAD_LIBS_PATH, 'BOSL2')}"
+    try:
+        # Clone the repository and checkout the specified commit
+        c.run(clone_command)
+        _pr_info("Repository cloned successfully.")
+    except Exception as e:
+        _pr_error(f"Failed to download BOSL2 library: {str(e)}")
+
+
+def _write_libs_path_to_envs():
+    os.environ["OPENSCADPATH"] = OPENSCAD_LIBS_PATH
 
 
 ###############################################
@@ -167,3 +203,7 @@ def _pr_error(message: str):
         pr_error("This is an error message.")
     """
     print(f"\033[91m[ERROR] {message}\033[0m")
+
+
+if __name__ == "__main__":
+    _write_libs_path_to_envs()
