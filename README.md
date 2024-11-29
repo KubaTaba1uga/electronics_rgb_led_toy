@@ -51,8 +51,15 @@ Components examples:
 ## Enclosure Design
 
 - **Software**: OpenSCAD
-- **Files**: Enclosure design files are located in the `enclosure/` directory.
+- **Files**: Enclosure design files are located in the `/openscad_src` directory.
 - **Printing**: Compatible with most FDM 3D printers; designed for easy assembly.
+
+## PCB Design
+
+- **Software**: KiCad
+- **Files**: PCB board design files are located in the `/kicad_src` directory.
+- **Ordering**: I ordered mine from PcbWay using quick setup feature and default settings.
+
 
 ## Getting Started
 
@@ -65,7 +72,7 @@ Components examples:
   - Access to a 3D printer for printing the enclosure
   - PCB fabrication service or equipment
 
-### Installation
+### Usage
 
 1. **Clone the Repository**
 
@@ -73,54 +80,15 @@ Components examples:
    git clone https://github.com/KubaTaba1uga/electronics_rgb_led_toy.git
    ```
 
-2. **Install Required Software**
+2. **Install Required Software [Optional]**
 
    - Download and install KiCad and OpenSCAD if you plan to modify the designs.
+   
+3. **Access 
 
-## Assembly Instructions
 
-### PCB Fabrication and Assembly
 
-1. **Fabricate the PCB**:
-
-   - Use the provided Gerber files in the `output/` directory to fabricate the PCB.
-
-2. **Solder Components**:
-
-   - Solder the RGB LED, potentiometers, resistors, and any connectors to the PCB according to the schematic.
-
-3. **Testing**:
-
-   - Before placing the PCB into the enclosure, test the circuit by connecting a suitable power supply.
-
-### Enclosure Printing and Assembly
-
-1. **Print the Enclosure**:
-
-   - Open the `.scad` file in OpenSCAD.
-   - Export it to an STL file.
-   - Use slicing software (e.g., Cura, PrusaSlicer) to prepare the STL for printing.
-   - Print the enclosure using a 3D printer.
-
-2. **Assemble the Enclosure**:
-
-   - Place the assembled PCB into the printed enclosure.
-   - Secure the PCB and close the enclosure with screws.
-
-## Usage
-
-1. **Power Up**:
-
-   - Put AAA betteries in battery holder.
-
-2. **Adjust Colors**:
-
-   - Use rocker switches and potentiometers to adjust the intensity of the red, green, and blue channels.
-
-3. **Create Colors**:
-
-   - Mix different levels to explore the full RGB color palette.
-
+   
 ## License
 
 This project is licensed under the [MIT License](LICENSE).

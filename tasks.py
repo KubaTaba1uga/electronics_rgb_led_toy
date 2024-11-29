@@ -34,7 +34,7 @@ def clean(c, bytecode=False, extra=""):
         inv clean --bytecode
         inv clean --extra='**/*.log'
     """
-    patterns = ["build", "**/*~", "**/#*", "*~", "#*", "**/*.stl"]
+    patterns = ["build/*", "**/*~", "**/#*", "*~", "#*", "**/*.stl"]
 
     if bytecode:
         patterns.append("**/*.pyc")
@@ -70,14 +70,34 @@ def open_kicad(c):
 
 
 @task
-def open_openscad(c):
+def open_openscad(
+    c, file_path=os.path.join(OPENSCAD_SRC_PATH, "enclosure_part_1.scad")
+):
     """
     Open openscad project.
 
     Usage:
-        inv open
+        inv open-openscad
     """
-    raise NotImplementedError()
+    CC = "openscad"
+    _write_libs_path_to_envs()
+
+    if not os.path.isfile(file_path):
+        _pr_error(f"File {file_path} does not exist!")
+        return
+
+    if _get_file_extension(file_path) != ".scad":
+        _pr_error(f"File {file_path} is not an OpenSCAD file!")
+        return
+
+    if not _command_exists(CC):
+        _pr_error(f"{CC} needs to be installed!")
+        return
+
+    _pr_info(f"Opening {file_path} in OpenSCAD")
+
+    command = f"{CC} {file_path}"
+    c.run(command)
 
 
 @task
