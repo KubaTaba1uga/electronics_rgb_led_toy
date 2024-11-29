@@ -116,6 +116,12 @@ def build(c):
         inv build
     """
     try:
+        download_deps(c)
+    except Exception:
+        _pr_error("Downloading dependencies failed!")
+        return
+
+    try:
         build_kicad(c)
     except Exception:
         _pr_error("Building KiCad project failed!")
@@ -231,23 +237,45 @@ def download_deps(c):
     _download_bosl2(c)
 
 
-def _download_bosl2(c):
-    _pr_info("Downloading BOSL2 library ...")
+def _download_bosl2(
+    c,
+):
+    """
+    Download or update the BOSL2 library and checkout a specific branch or commit.
+
+    This function checks if the BOSL2 library repository already exists. If it does,
+    it pulls the latest changes and checks out the specified branch or commit.
+    If it doesn't exist, it clones the repository and checks out the specified branch or commit.
+
+    Args:
+        c: The invoke context.
+        branch_or_commit (str): The branch or commit to checkout. Defaults to "main".
+    """
+    _pr_info("Checking BOSL2 library...")
     if not _command_exists("git"):
         _pr_error("Git is not installed or not available in the PATH.")
         return
 
-    if not os.path.exists(OPENSCAD_LIBS_PATH):
-        os.makedirs(OPENSCAD_LIBS_PATH)
+    branch_or_commit = "c442c5159ae605dfe5d4f0262d521aeae02ea6c3"
+    bosl2_path = os.path.join(OPENSCAD_LIBS_PATH, "BOSL2")
 
-    repo_url = "https://github.com/BelfrySCAD/BOSL2.git"
-    clone_command = f"git clone {repo_url} {os.path.join(OPENSCAD_LIBS_PATH, 'BOSL2')}"
-    try:
-        # Clone the repository and checkout the specified commit
-        c.run(clone_command)
-        _pr_info("Repository cloned successfully.")
-    except Exception as e:
-        _pr_error(f"Failed to download BOSL2 library: {str(e)}")
+    # Ensure the OpenSCAD libraries directory exists
+    os.makedirs(OPENSCAD_LIBS_PATH, exist_ok=True)
+
+    if os.path.exists(bosl2_path) and os.path.isdir(bosl2_path):
+        _pr_info(f"BOSL2 repository found at {bosl2_path}. Doing nothing...")
+    else:
+        # Clone the repository if it doesn't exist
+        repo_url = "https://github.com/BelfrySCAD/BOSL2.git"
+        clone_command = f"git clone {repo_url} {bosl2_path}"
+        _pr_info(f"Cloning BOSL2 repository to {bosl2_path}...")
+        try:
+            c.run(clone_command)
+            with c.cd(bosl2_path):
+                c.run(f"git checkout {branch_or_commit}")
+            _pr_info(f"BOSL2 repository cloned and checked out to {branch_or_commit}.")
+        except Exception as e:
+            _pr_error(f"Failed to download or checkout BOSL2 library: {e}")
 
 
 def _write_libs_path_to_envs():
