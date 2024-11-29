@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/home/taba1uga/Github/rgb_led_demo/kicad/rgb_led_demo.kicad_sch</source>
+    <date>Tue 17 Sep 2024 07:27:22 AM UTC</date>
+    <tool>Eeschema 6.0.11+dfsg-1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>rgb_led_demo.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="BT1">
+      <value>4.5V</value>
+      <footprint>Battery:BatteryHolder_Keystone_2479_3xAAA</footprint>
+      <libsource lib="Device" part="Battery_Cell" description="Single-cell battery"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rgb_led_demo.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6ebb470e-d0b0-47d1-b572-6a2b2d8d5d0d</tstamps>
+    </comp>
+    <comp ref="D1">
+      <value>LED_RGBK</value>
+      <footprint>LED_THT:LED_D5.0mm-4_RGB</footprint>
+      <libsource lib="Device" part="LED_RGBK" description="RGB LED, red/green/blue/cathode"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rgb_led_demo.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d5ffd2fc-9027-448e-8ce2-3086302a1ce8</tstamps>
+    </comp>
+    <comp ref="RB1">
+      <value>68 Ohm</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rgb_led_demo.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7f8da56e-295e-4def-bbc5-31e906a3465c</tstamps>
+    </comp>
+    <comp ref="RG1">
+      <value>100 Ohm</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rgb_led_demo.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cfcad2ca-cbff-4f8e-9651-4d41fd183608</tstamps>
+    </comp>
+    <comp ref="RR1">
+      <value>120 Ohm</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rgb_led_demo.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c9aafd63-5fc0-4d45-b968-cc84e3fcbbaa</tstamps>
+    </comp>
+    <comp ref="RVB1">
+      <value>10k Ohm</value>
+      <footprint>Potentiometer_THT:Potentiometer_Alps_RK163_Single_Horizontal</footprint>
+      <libsource lib="Device" part="R_Potentiometer_Trim" description="Trim-potentiometer"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rgb_led_demo.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>62afe625-ec90-4782-882a-1c0704355b25</tstamps>
+    </comp>
+    <comp ref="RVG1">
+      <value>10k Ohm</value>
+      <footprint>Potentiometer_THT:Potentiometer_Alps_RK163_Single_Horizontal</footprint>
+      <libsource lib="Device" part="R_Potentiometer_Trim" description="Trim-potentiometer"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rgb_led_demo.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>94258a1b-fc9b-451d-a01f-9eb95be0df99</tstamps>
+    </comp>
+    <comp ref="RVR1">
+      <value>10k Ohm</value>
+      <footprint>Potentiometer_THT:Potentiometer_Alps_RK163_Single_Horizontal</footprint>
+      <libsource lib="Device" part="R_Potentiometer_Trim" description="Trim-potentiometer"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rgb_led_demo.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f2469013-1637-4e41-9fc1-c1ba56d3f3bd</tstamps>
+    </comp>
+    <comp ref="SWB1">
+      <value>SW_SPST</value>
+      <footprint>Button_Switch_THT:SW_DIP_SPSTx01_Slide_9.78x4.72mm_W7.62mm_P2.54mm</footprint>
+      <libsource lib="Switch" part="SW_SPST" description="Single Pole Single Throw (SPST) switch"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rgb_led_demo.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4a078002-976c-4915-9bda-55ecc99f48a6</tstamps>
+    </comp>
+    <comp ref="SWG1">
+      <value>SW_SPST</value>
+      <footprint>Button_Switch_THT:SW_DIP_SPSTx01_Slide_9.78x4.72mm_W7.62mm_P2.54mm</footprint>
+      <libsource lib="Switch" part="SW_SPST" description="Single Pole Single Throw (SPST) switch"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rgb_led_demo.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d8aa9c16-814b-40a8-aa72-eeeb2bc80ada</tstamps>
+    </comp>
+    <comp ref="SWR1">
+      <value>SW_SPST</value>
+      <footprint>Button_Switch_THT:SW_DIP_SPSTx01_Slide_9.78x4.72mm_W7.62mm_P2.54mm</footprint>
+      <libsource lib="Switch" part="SW_SPST" description="Single Pole Single Throw (SPST) switch"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rgb_led_demo.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cd04fc7d-18c4-43df-9fe8-628ad7d17f63</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Device" part="Battery_Cell">
+      <description>Single-cell battery</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">BT</field>
+        <field name="Value">Battery_Cell</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="+" type="passive"/>
+        <pin num="2" name="-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED_RGBK">
+      <description>RGB LED, red/green/blue/cathode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED_RGBK</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="RA" type="passive"/>
+        <pin num="2" name="GA" type="passive"/>
+        <pin num="3" name="BA" type="passive"/>
+        <pin num="4" name="K" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R_Potentiometer_Trim">
+      <description>Trim-potentiometer</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Potentiometer*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">RV</field>
+        <field name="Value">R_Potentiometer_Trim</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Switch" part="SW_SPST">
+      <description>Single Pole Single Throw (SPST) switch</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SW_SPST</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="B" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Device">
+      <uri>/usr/share/kicad/symbols//Device.kicad_sym</uri>
+    </library>
+    <library logical="Switch">
+      <uri>/usr/share/kicad/symbols//Switch.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="GND">
+      <node ref="BT1" pin="2" pinfunction="-" pintype="passive"/>
+      <node ref="D1" pin="4" pinfunction="K" pintype="passive"/>
+    </net>
+    <net code="2" name="Net-(BT1-Pad1)">
+      <node ref="BT1" pin="1" pinfunction="+" pintype="passive"/>
+      <node ref="SWB1" pin="1" pinfunction="A" pintype="passive"/>
+      <node ref="SWG1" pin="1" pinfunction="A" pintype="passive"/>
+      <node ref="SWR1" pin="1" pinfunction="A" pintype="passive"/>
+    </net>
+    <net code="3" name="Net-(D1-Pad1)">
+      <node ref="D1" pin="1" pinfunction="RA" pintype="passive"/>
+      <node ref="RVR1" pin="3" pinfunction="3" pintype="passive"/>
+    </net>
+    <net code="4" name="Net-(D1-Pad2)">
+      <node ref="D1" pin="2" pinfunction="GA" pintype="passive"/>
+      <node ref="RVG1" pin="3" pinfunction="3" pintype="passive"/>
+    </net>
+    <net code="5" name="Net-(D1-Pad3)">
+      <node ref="D1" pin="3" pinfunction="BA" pintype="passive"/>
+      <node ref="RVB1" pin="3" pinfunction="3" pintype="passive"/>
+    </net>
+    <net code="6" name="Net-(RB1-Pad1)">
+      <node ref="RB1" pin="1" pintype="passive"/>
+      <node ref="SWB1" pin="2" pinfunction="B" pintype="passive"/>
+    </net>
+    <net code="7" name="Net-(RB1-Pad2)">
+      <node ref="RB1" pin="2" pintype="passive"/>
+      <node ref="RVB1" pin="2" pinfunction="2" pintype="passive"/>
+    </net>
+    <net code="8" name="Net-(RG1-Pad1)">
+      <node ref="RG1" pin="1" pintype="passive"/>
+      <node ref="SWG1" pin="2" pinfunction="B" pintype="passive"/>
+    </net>
+    <net code="9" name="Net-(RG1-Pad2)">
+      <node ref="RG1" pin="2" pintype="passive"/>
+      <node ref="RVG1" pin="2" pinfunction="2" pintype="passive"/>
+    </net>
+    <net code="10" name="Net-(RR1-Pad1)">
+      <node ref="RR1" pin="1" pintype="passive"/>
+      <node ref="SWR1" pin="2" pinfunction="B" pintype="passive"/>
+    </net>
+    <net code="11" name="Net-(RR1-Pad2)">
+      <node ref="RR1" pin="2" pintype="passive"/>
+      <node ref="RVR1" pin="2" pinfunction="2" pintype="passive"/>
+    </net>
+    <net code="12" name="unconnected-(RVB1-Pad1)">
+      <node ref="RVB1" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="13" name="unconnected-(RVG1-Pad1)">
+      <node ref="RVG1" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="14" name="unconnected-(RVR1-Pad1)">
+      <node ref="RVR1" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+  </nets>
+</export>

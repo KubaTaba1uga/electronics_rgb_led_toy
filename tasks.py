@@ -54,19 +54,86 @@ def build(c):
     Usage:
         inv build
     """
+    try:
+        _build_kicad_project(c)
+    except Exception:
+        return
 
-    raise NotImplementedError()
+
+def _build_kicad_project(c):
+    """
+    Build KiCad project: generate Gerber and drill files.
+
+    This task assumes `kicad-cli` is installed and available in the PATH.
+
+    Usage:
+        inv build-kicad-project
+    """
+    project_name = (
+        "rgb_led_toy.kicad_pcb"  # Change if your PCB file has a different name
+    )
+    pcb_file = os.path.join(KICAD_SRC_PATH, project_name)
+    output_path = os.path.join(BUILD_PATH, "kicad_output")
+
+    if not os.path.isfile(pcb_file):
+        _pr_error(f"PCB file {pcb_file} does not exist!")
+        raise ValueError()
+
+    if not _command_exists("kicad-cli"):
+        _pr_error("kicad-cli is not installed or not in PATH!")
+        raise ValueError()
+
+    # Create the output directory if it doesn't exist
+    os.makedirs(output_path, exist_ok=True)
+
+    # Generate Gerber files
+    _pr_info("Generating Gerber files...")
+    gerber_command = f"kicad-cli pcb export gerbers --output {output_path} {pcb_file}"
+    try:
+        c.run(gerber_command)
+        _pr_info("Gerber files generated successfully.")
+    except Exception as e:
+        _pr_error(f"Failed to generate Gerber files: {e}")
+        raise e
+
+    # Generate drill files
+    _pr_info("Generating drill files...")
+    drill_command = f"kicad-cli pcb export drill --output {output_path} {pcb_file}"
+    try:
+        c.run(drill_command)
+        _pr_info("Drill files generated successfully.")
+    except Exception as e:
+        _pr_error(f"Failed to generate drill files: {e}")
+        raise e
+
+    _pr_info(f"KiCad project built successfully. Output saved to {output_path}.")
 
 
 @task
 def open_kicad(c):
     """
-    Open kicad project.
+    Open KiCad project.
 
     Usage:
-        inv open
+        inv open-kicad
     """
-    raise NotImplementedError()
+    CC = "kicad"
+    project_name = "rgb_led_toy.kicad_pro"
+    project_file = os.path.join(KICAD_SRC_PATH, project_name)
+
+    if not os.path.isfile(project_file):
+        _pr_error(f"Project file {project_file} does not exist!")
+        return
+
+    if not _command_exists(CC):
+        _pr_error(f"{CC} needs to be installed!")
+        return
+
+    _pr_info(f"Opening {project_file} in KiCad")
+
+    command = f"{CC} {project_file}"
+    print(command)
+    c.run(command)
 
 
 @task
@@ -143,19 +210,31 @@ def _get_file_extension(file_path):
 
 
 def _command_exists(command):
+    """
+    Check if a command exists using 'which'.
+
+    Args:
+        command (str): The command to check.
+
+    Returns:
+        bool: True if the command exists, False otherwise.
+    """
     try:
-        # Attempt to run the command with '--version' or any other flag that doesn't change system state
-        subprocess.run(
-            [command, "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        result = subprocess.run(
+            ["which", command],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=True,
         )
-        return True
+        return result.returncode == 0
     except FileNotFoundError:
         return False
     except subprocess.CalledProcessError:
-        # The command exists but returned an error
-        return True
-    except Exception:
-        # Catch any other exceptions
+        # If 'which' runs but doesn't find the command, return False
+        return False
+    except Exception as e:
+        # Log unexpected errors
+        _pr_error(f"Error checking command {command} with 'which': {e}")
         return False
 
 
