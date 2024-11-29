@@ -237,20 +237,7 @@ def download_deps(c):
     _download_bosl2(c)
 
 
-def _download_bosl2(
-    c,
-):
-    """
-    Download or update the BOSL2 library and checkout a specific branch or commit.
-
-    This function checks if the BOSL2 library repository already exists. If it does,
-    it pulls the latest changes and checks out the specified branch or commit.
-    If it doesn't exist, it clones the repository and checks out the specified branch or commit.
-
-    Args:
-        c: The invoke context.
-        branch_or_commit (str): The branch or commit to checkout. Defaults to "main".
-    """
+def _download_bosl2(c):
     _pr_info("Checking BOSL2 library...")
     if not _command_exists("git"):
         _pr_error("Git is not installed or not available in the PATH.")
