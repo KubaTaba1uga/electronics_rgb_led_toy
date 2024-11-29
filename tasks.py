@@ -47,69 +47,6 @@ def clean(c, bytecode=False, extra=""):
 
 
 @task
-def build(c):
-    """
-    Build repo.
-
-    Usage:
-        inv build
-    """
-    try:
-        _build_kicad_project(c)
-    except Exception:
-        return
-
-
-def _build_kicad_project(c):
-    """
-    Build KiCad project: generate Gerber and drill files.
-
-    This task assumes `kicad-cli` is installed and available in the PATH.
-
-    Usage:
-        inv build-kicad-project
-    """
-    project_name = (
-        "rgb_led_toy.kicad_pcb"  # Change if your PCB file has a different name
-    )
-    pcb_file = os.path.join(KICAD_SRC_PATH, project_name)
-    output_path = os.path.join(BUILD_PATH, "kicad_output")
-
-    if not os.path.isfile(pcb_file):
-        _pr_error(f"PCB file {pcb_file} does not exist!")
-        raise ValueError()
-
-    if not _command_exists("kicad-cli"):
-        _pr_error("kicad-cli is not installed or not in PATH!")
-        raise ValueError()
-
-    # Create the output directory if it doesn't exist
-    os.makedirs(output_path, exist_ok=True)
-
-    # Generate Gerber files
-    _pr_info("Generating Gerber files...")
-    gerber_command = f"kicad-cli pcb export gerbers --output {output_path} {pcb_file}"
-    try:
-        c.run(gerber_command)
-        _pr_info("Gerber files generated successfully.")
-    except Exception as e:
-        _pr_error(f"Failed to generate Gerber files: {e}")
-        raise e
-
-    # Generate drill files
-    _pr_info("Generating drill files...")
-    drill_command = f"kicad-cli pcb export drill --output {output_path} {pcb_file}"
-    try:
-        c.run(drill_command)
-        _pr_info("Drill files generated successfully.")
-    except Exception as e:
-        _pr_error(f"Failed to generate drill files: {e}")
-        raise e
-
-    _pr_info(f"KiCad project built successfully. Output saved to {output_path}.")
-
-
-@task
 def open_kicad(c):
     """
     Open KiCad project.
@@ -165,6 +102,122 @@ def open_openscad(
 
     command = f"{CC} {file_path}"
     c.run(command)
+
+
+@task
+def build(c):
+    """
+    Build the entire project: KiCad and OpenSCAD.
+
+    This function builds both the KiCad project (Gerber and drill files)
+    and the OpenSCAD project (STL files).
+
+    Usage:
+        inv build
+    """
+    try:
+        build_kicad(c)
+    except Exception:
+        _pr_error("Building KiCad project failed!")
+        return
+
+    try:
+        build_openscad(c)
+    except Exception:
+        _pr_error("Building OpenSCAD project failed!")
+        return
+
+
+@task
+def build_kicad(c):
+    """
+    Build KiCad project: generate Gerber and drill files.
+
+    This task assumes `kicad-cli` is installed and available in the PATH.
+
+    Usage:
+        inv build-kicad
+    """
+    project_name = (
+        "rgb_led_toy.kicad_pcb"  # Change if your PCB file has a different name
+    )
+    pcb_file = os.path.join(KICAD_SRC_PATH, project_name)
+    output_path = os.path.join(BUILD_PATH, "kicad_output")
+
+    if not os.path.isfile(pcb_file):
+        _pr_error(f"PCB file {pcb_file} does not exist!")
+        raise ValueError()
+
+    if not _command_exists("kicad-cli"):
+        _pr_error("kicad-cli is not installed or not in PATH!")
+        raise ValueError()
+
+    # Create the output directory if it doesn't exist
+    os.makedirs(output_path, exist_ok=True)
+
+    # Generate Gerber files
+    _pr_info("Generating Gerber files...")
+    gerber_command = f"kicad-cli pcb export gerbers --output {output_path} {pcb_file}"
+    try:
+        c.run(gerber_command)
+        _pr_info("Gerber files generated successfully.")
+    except Exception as e:
+        _pr_error(f"Failed to generate Gerber files: {e}")
+        raise e
+
+    # Generate drill files
+    _pr_info("Generating drill files...")
+    drill_command = f"kicad-cli pcb export drill --output {output_path} {pcb_file}"
+    try:
+        c.run(drill_command)
+        _pr_info("Drill files generated successfully.")
+    except Exception as e:
+        _pr_error(f"Failed to generate drill files: {e}")
+        raise e
+
+    _pr_info(f"KiCad project built successfully. Output saved to {output_path}.")
+
+
+@task
+def build_openscad(c):
+    """
+    Build OpenSCAD project: generate STL files from .scad files.
+
+    Usage:
+        inv build-openscad
+    """
+    output_path = os.path.join(BUILD_PATH, "openscad_output")
+    _write_libs_path_to_envs()
+
+    if not _command_exists("openscad"):
+        _pr_error("OpenSCAD is not installed or not in PATH!")
+        raise ValueError("OpenSCAD command not found.")
+
+    # List all .scad files in the OpenSCAD source directory
+    scad_files = _list_scad_files_recursively(OPENSCAD_SRC_PATH)
+
+    # Ensure the build directory exists
+    os.makedirs(BUILD_PATH, exist_ok=True)
+    # Create the output directory if it doesn't exist
+    os.makedirs(output_path, exist_ok=True)
+
+    # Generate STL files
+    for file_path in scad_files:
+        output_file = os.path.join(
+            output_path, os.path.basename(file_path).replace(".scad", ".stl")
+        )
+        _pr_info(f"Generating STL for {file_path} -> {output_file}")
+
+        # Run the OpenSCAD command
+        command = f"openscad -o {output_file} {file_path}"
+        try:
+            c.run(command)
+            _pr_info(f"Generated STL: {output_file}")
+        except Exception as e:
+            _pr_error(f"Failed to generate STL for {file_path}: {e}")
+            raise e
+
+    _pr_info("OpenSCAD project built successfully.")
 
 
 @task
@@ -250,6 +303,20 @@ def _cut_path_to_directory(full_path, target_directory):
 
     target_index = parts.index(target_directory)
     return os.sep.join(parts[: target_index + 1])
+
+
+def _list_scad_files_recursively(root_dir):
+    _SCAD_EXTENSION = ".scad"
+    files = []
+
+    for dirpath, dirnames, filenames in os.walk(root_dir):
+        for filename in filenames:
+            if "_" == filename[:1]:
+                continue
+            if _SCAD_EXTENSION == _get_file_extension(filename):
+                files.append(os.path.join(dirpath, filename))
+
+    return sorted(files)
 
 
 def _pr_info(message: str):
