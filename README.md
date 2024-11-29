@@ -2,7 +2,7 @@
 
 A simple project demonstrating how an RGB LED works. By adjusting potentiometers, users can mix red, green, and blue light to create any color in the RGB spectrum.
 
-![Project Image](path/to/project-image.jpg)
+![Project Image](assembled-box.jpg)
 
 ## Table of Contents
 
