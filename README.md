@@ -1,8 +1,8 @@
-# RGB LED toy
+# RGB LED Toy
 
-A simple toy demonstrating how an RGB LED works. By adjusting potentiometers, users can mix red, green, and blue light to create any color in the RGB spectrum.
+A simple project demonstrating how an RGB LED works. By adjusting potentiometers, users can mix red, green, and blue light to create any color in the RGB spectrum.
 
-![Project Image](path_to_image.png) <!-- Add an image of your project here -->
+![Project Image](path/to/project-image.jpg)
 
 ## Table of Contents
 
@@ -25,7 +25,7 @@ This project consists of a PCB board designed in KiCad and an enclosure designed
 
 - **RGB Color Mixing**: Adjust potentiometers to mix red, green, and blue light.
 - **Custom PCB Design**: PCB board designed using KiCad.
-- **3D Printable Enclosure**: Box designed in OpenSCAD for housing the PCB.
+- **3D Printable Enclosure**: Box designed in OpenSCAD for housing the PCB and components.
 
 ## Hardware Components
 
@@ -50,48 +50,32 @@ Components examples:
 
 ## Enclosure Design
 
-- **Software**: OpenSCAD
-- **Files**: Enclosure design files are located in the `/openscad_src` directory.
-- **Printing**: Compatible with most FDM 3D printers; designed for easy assembly.
-
-## PCB Design
-
-- **Software**: KiCad
-- **Files**: PCB board design files are located in the `/kicad_src` directory.
-- **Ordering**: I ordered mine from PcbWay using quick setup feature and default settings.
-
+The enclosure is designed in OpenSCAD and can be 3D printed. The design files are available in the `openscad_src` directory. Ensure your 3D printer is calibrated correctly for precise fitting of components.
 
 ## Getting Started
 
-### Prerequisites
+1. **Clone the Repository**: Clone this repository to your local machine using `git clone https://github.com/KubaTaba1uga/electronics_rgb_led_toy.git`.
+2. **Review the Schematics**: Open the KiCad files located in the `kicad_src` directory to understand the circuit design.
+3. **Prepare the PCB**: Manufacture the PCB using the provided design files or use a prototyping board for initial testing.
+4. **Gather Components**: Ensure all necessary components are available before assembly.
 
-- **Software**:
-  - [KiCad](https://www.kicad.org/) for viewing/modifying PCB files
-  - [OpenSCAD](https://www.openscad.org/) for viewing/modifying the enclosure
-- **Hardware**:
-  - Access to a 3D printer for printing the enclosure
-  - PCB fabrication service or equipment
+## Assembly Instructions
 
-### Usage
+1. **Solder Components**: Solder the RGB LED, potentiometers, resistors, and connectors onto the PCB as per the schematic.
+2. **Assemble Enclosure**: 3D print the enclosure and place the assembled PCB inside, securing it appropriately.
 
-1. **Clone the Repository**
+## Usage
 
-   ```bash
-   git clone https://github.com/KubaTaba1uga/electronics_rgb_led_toy.git
-   ```
+- **Adjust Colors**: Rotate the potentiometers to vary the intensity of each color channel (red, green, blue) and observe the resulting color from the RGB LED.
+- **Experiment**: Mix different levels to create various colors and understand additive color mixing principles.
 
-2. **Install Required Software [Optional]**
+## Contributing
 
-   - Download and install KiCad and OpenSCAD if you plan to modify the designs.
-   
-3. **Access 
+Contributions are welcome! Please fork the repository and create a pull request with your proposed changes. Ensure your code adheres to the project's coding standards and includes appropriate documentation.
 
-
-
-   
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 ## Acknowledgments
 
